@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administrator;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-   
+
     /**
      * Handle a login request to the application.
      *
@@ -53,21 +54,27 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'Email' => 'required|string|email',
-            'Password' => 'required|string',
+            'Email' => 'required|email',
+            'Password' => 'required',
         ]);
 
-        $user = User::where('Email', $request->Email)->first();
-        
-        if ($user && Hash::check($request->Password, $user->Password)) {
-            Auth::login($user);
-            return redirect()->intended('user'); // or wherever you want to redirect
-        } else {
-            throw ValidationException::withMessages([
-                'Email' => [trans('auth.failed')],
-            ]);
-        }
+        $admin = Administrator::where('Email', $request->Email)->first();
 
-        
+        if ($admin && Hash::check($request->Password, $admin->Password)) {
+
+            session(['admin' => $admin]);
+            return redirect()->to('salon'); // or wherever you want to redirect
+
+        } else {
+            $user = User::where('Email', $request->Email)->first();
+            if ($user && Hash::check($request->Password, $user->Password)) {
+                Auth::login($user);
+                return redirect()->to('user'); // or wherever you want to redirect
+            } else {
+                throw ValidationException::withMessages([
+                    'Email' => [trans('auth.failed')],
+                ]);
+            }
+        }
     }
 }

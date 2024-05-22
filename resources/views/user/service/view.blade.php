@@ -5,7 +5,6 @@
 @section('content')
 @include('partials.user-menu')
 
-@section('content')
 <section class="py-5">
 <div class="container">
     <!-- Page Heading/Breadcrumbs-->
@@ -26,7 +25,7 @@
                             <h2 class="card-title">{{ $staff['name'] }}</h2>
                             <a href="#!">
                              @php
-                                $image = $staff['image'] ?? '/images/DefaultProfileImage.jpeg';
+                                $image = $staff['image'] ?? '/assets/images/DefaultProfileImage.jpeg';
                                 $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
                             @endphp
                             <img class="img-fluid rounded" src="{{$imageUrl}}" alt="staffImage" />

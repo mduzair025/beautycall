@@ -25,6 +25,7 @@ class UserFactory extends Factory
     {
         return [
             'Name' => $this->faker->firstName,
+            'Surname' => $this->faker->firstName,
             'Username' => $this->faker->unique()->userName,
             'email_verified_at' => now(),
             'Password' => static::$password ??= Hash::make('password'), // Default password

@@ -86,27 +86,27 @@
         <div class="row">
             <div class="col-lg-4 col-sm-12 mb-4">
                 <div class="card h-100">
-                    <a href="/User/CategorySalons.php?CategoryPass=Hairstyle"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/hairstyle.jpeg" alt="Hairstyle" width="" height=""></a>
+                    <a href="{{route('user.category.view', ['category' => 'Hairstyle'])}}"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/hairstyle.jpeg" alt="Hairstyle" width="" height=""></a>
                     <div class="card-body">
-                        <h3 class="card-title"><a href="/User/CategorySalons.php?CategoryPass=Hairstyle">Hairstyle</a></h3>
+                        <h3 class="card-title"><a href="{{route('user.category.view', ['category' => 'Hairstyle'])}}">Hairstyle</a></h3>
                         <p class="card-text">Chose your favourite hairdressing salon.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-12 mb-4">
                 <div class="card h-100">
-                    <a href="/User/CategorySalons.php?CategoryPass=Makeup"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/makeup.jpeg" alt="Makeup" width="" height=""></a>
+                    <a href="{{route('user.category.view', ['category' => 'Makeup'])}}"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/makeup.jpeg" alt="Makeup" width="" height=""></a>
                     <div class="card-body">
-                        <h3 class="card-title"><a href="/User/CategorySalons.php?CategoryPass=Makeup">Makeup</a></h3>
+                        <h3 class="card-title"><a href="{{route('user.category.view', ['category' => 'Makeup'])}}">Makeup</a></h3>
                         <p class="card-text">Do your makeup.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-12 mb-4">
                 <div class="card h-100">
-                    <a href="/User/CategorySalons.php?CategoryPass=Tattoos"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/tattoo.jpeg" alt="Tattoos" width="" height=""></a>
+                    <a href="{{route('user.category.view', ['category' => 'Tattoos'])}}"><img class="card-img-top" src="{{asset('assets')}}/images/ServiceCategoryImages/tattoo.jpeg" alt="Tattoos" width="" height=""></a>
                     <div class="card-body">
-                        <h3 class="card-title"><a href="/User/CategorySalons.php?CategoryPass=Tattoos">Tattoos</a></h3>
+                        <h3 class="card-title"><a href="{{route('user.category.view', ['category' => 'Tattoos'])}}">Tattoos</a></h3>
                         <p class="card-text">Have a tattoo.</p>
                     </div>
                 </div>

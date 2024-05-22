@@ -18,7 +18,7 @@
                     <a href="{{ route('user.category.view', ['category' => $category->ServiceCategoryName]) }}">
                         <div class="card h-100">
                             @php
-                                $image = $category->ImageName ?? '/images/DefaultProfileImage.jpeg';
+                                $image = $category->ImageName ?? '/assets/images/DefaultProfileImage.jpeg';
                                 $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
                             @endphp
                             <img class="card-img-top" 

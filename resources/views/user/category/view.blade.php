@@ -39,7 +39,11 @@
                                     </ul>
                                 </div>
                                 <div class="col-lg-6">
-                                    <img class="img-fluid rounded" src="{{ $salon?->ImageName }}" alt="SalonImages" />
+                                    @php
+                                        $image = $salon?->ImageName ?? '/assets/images/DefaultProfileImage.jpeg';
+                                        $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
+                                    @endphp
+                                    <img class="img-fluid rounded" src="{{ $imageUrl }}" alt="SalonImages" />
                                 </div>
                             </div>
                         </div>

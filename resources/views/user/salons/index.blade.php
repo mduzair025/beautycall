@@ -35,15 +35,15 @@
                                 <li>Average salon rating: {{ $salon->AverageSalonRating }}</li>
                             </ul>
                         </div>
-                        @if($salon->image)
-                            @php
-                                $image = $salon->image->ImageName ?? '/images/DefaultProfileImage.jpeg';
-                                $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
-                            @endphp
-                            <div class="col-lg-6">
-                                <img class="img-fluid rounded" src="{{$imageUrl}}" alt="salonImage" />
-                            </div>
-                        @endif
+                        
+                        @php
+                            $image = $salon->image->ImageName ?? '/assets/images/DefaultProfileImage.jpeg';
+                            $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
+                        @endphp
+                        <div class="col-lg-6">
+                            <img class="img-fluid rounded" src="{{$imageUrl}}" alt="salonImage" />
+                        </div>
+                        
                     </div>
                 </div>
             </section>
