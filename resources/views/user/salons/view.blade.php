@@ -44,7 +44,7 @@
                 <!-- Your PHP logic for the carousel -->
                 <div class="card-body">
                     @php
-                        $image = $service->ImageName ?? '/images/DefaultProfileImage.jpeg';
+                        $image = $service->ServiceImage ?? '/images/DefaultProfileImage.jpeg';
                         $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
                     @endphp
                     <img class="card-img-top" src="{{$imageUrl}}" alt="ServiceCategoryImage">
