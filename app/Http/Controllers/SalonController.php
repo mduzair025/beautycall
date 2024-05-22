@@ -88,11 +88,20 @@ class SalonController extends Controller
 
         $services = Service::distinct()
             ->join('service_categories', 'service_categories.id', '=', 'services.ServiceCategoryID')
+            ->join('service_images', 'service_images.ServiceID', '=', 'services.id')
             ->join('service_providers', 'services.ServiceProviderID', '=', 'service_providers.id')
             ->where('service_providers.Name', $salonName)
             ->where('service_categories.ServiceCategoryName', $categoryName)
+            ->select(
+                'service_images.ImageName as ServiceImage',
+                'service_images.*',
+                'service_categories.*',
+                'service_providers.*',
+                'services.*'
+            )
             ->orderBy('service_providers.Name', 'DESC')
             ->get();
+        
         
         return view('user.salons.view')->with([
             'salon'        => $salon,
