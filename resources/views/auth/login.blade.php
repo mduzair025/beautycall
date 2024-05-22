@@ -18,14 +18,14 @@
                 <div class='input-fields'>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <input type='text' placeholder='Email' class='input-line full-width @error(' email') is-invalid @enderror' name="email" value="{{ old('email') }}" required>
-                        @error('email')
+                        <input type='text' placeholder='Email' class='input-line full-width @error(' Email') is-invalid @enderror' name="Email" value="{{ old('Email') }}" required>
+                        @error('Email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <input type='password' placeholder='Password' class='input-line full-width @error(' password') is-invalid @enderror' name="password" required>
-                        @error('password')
+                        <input type='password' placeholder='Password' class='input-line full-width @error(' Password') is-invalid @enderror' name="Password" required>
+                        @error('Password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -45,7 +45,7 @@
                 <span class='highlight'>
                     <a href="{{ route('admin.register') }}">Work with us</a>
                 </span>
-            </div> 
+            </div>
         </div>
     </div>
     </div>

@@ -10,7 +10,7 @@
         @if ($salons->count() > 0)
             @foreach ($salons as $salon)
                 
-                <a href="{{ route('salon.view', ['salon' => $salon->Name, 'category' => $category]) }}">
+                <a href="{{ route('user.salon.view', ['salon' => $salon->Name, 'category' => $category]) }}">
                     <section class="py-5">
                         <div class="container">
                             <div class="row SalonRow">

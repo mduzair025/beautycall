@@ -25,7 +25,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @foreach ($categories as $cat) 
-                            <a class="dropdown-item" href="{{ route('salon.view', ['salon' => $salon->Name, 'category' => $cat->ServiceCategoryName]) }}">
+                            <a class="dropdown-item" href="{{ route('user.salon.view', ['salon' => $salon->Name, 'category' => $cat->ServiceCategoryName]) }}">
                                 {{$cat['ServiceCategoryName']}}</a>
                         @endforeach
                         </div>
@@ -46,7 +46,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ $service->ServiceName }}</h2>
                 <p class="card-text">{{ $service->ShortDescription }}</p>
-                <a class="btn btn-primary" href="/User/DateSelector.php?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
+                <a class="btn btn-primary" href="{{route('user.bookings.date-selector')}}?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
             </div>
             <div class="card-footer text-muted"><br>
                 Time duration: {{ $service->TimeDurationHours }}H:{{ $service->TimeDurationMinutes }}M
@@ -59,15 +59,15 @@
 </section>
 
 <footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">
-            Salon Informations:<br>
-            Country: {{ $salon->Country }} <br>
-            Address: {{ $salon->Address }} <br>
-            Postal Code: {{ $salon->PostalCode }} <br>
-            Email: {{ $salon->Email }} <br>
-            Phone Number: {{ $salon->PhoneNumber }}
-        </p>
-    </div>
+    
+    <p class="m-0 text-center text-white">
+        Salon Informations:<br>
+        Country: {{ $salon->Country }} <br>
+        Address: {{ $salon->Address }} <br>
+        Postal Code: {{ $salon->PostalCode }} <br>
+        Email: {{ $salon->Email }} <br>
+        Phone Number: {{ $salon->PhoneNumber }}
+    </p>
+
 </footer>
 @endsection

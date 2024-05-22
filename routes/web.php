@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SalonController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,24 +19,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes(['register'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/salon/view/{salon}/{category}', [SalonController::class, 'viewSalon'])->name('salon.view');
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    Route::get('/categories', [UserController::class, 'categories'])->name('categories');
-    Route::get('/category-salons/{category}', [UserController::class, 'category'])->name('category.salons');
-    Route::get('/ricerca-categories', [UserController::class, 'ricercaCategory'])->name('get.ricerca.categories');
+    Route::post('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.view');
+    Route::get('/get-categories', [CategoryController::class, 'getCategories'])->name('category.get-categories');
+    
+    Route::get('/salons', [SalonController::class, 'index'])->name('salons');
+    Route::get('/search-salons', [SalonController::class, 'getSalons'])->name('salon.get-salons');
+    Route::get('/salon/{salon}/category/{category}', [SalonController::class, 'show'])->name('salon.view');
 
-    Route::get('/salons', [UserController::class, 'salons'])->name('salons');
-    Route::get('/bookings', [UserController::class, 'bookings'])->name('bookings');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/date-selector', [BookingController::class, 'dateSelector'])->name('bookings.date-selector');
+    Route::post('/bookings/give-review', [BookingController::class, 'giveReview'])->name('bookings.give-reveiw');
+    Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::post('/booking-confirm', [BookingController::class, 'confirmBooking'])->name('bookings.confirm');
+
+    Route::post('/service-view', [SalonController::class, 'serviceView'])->name('service.view');
 });
 
 

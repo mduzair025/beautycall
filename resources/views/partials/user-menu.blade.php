@@ -24,13 +24,20 @@
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('user.bookings')}}">Bookings</a>
+                            <a class="dropdown-item" href="{{route('user.bookings.index')}}">Bookings</a>
                             <a class="dropdown-item" href="{{route('user.profile')}}">Account informations</a>
-                            <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                     <li>
-                        <img src="{{auth()->user()->UserImageName ? '/images/DefaultProfileImage.jpeg' :  auth()->user()->UserImageName}}" class="rounded-circle" alt="Profile Image">
+                        <img src="{{auth()->user()->UserImageName ?  asset(auth()->user()->UserImageName) : '/images/DefaultProfileImage.jpeg'}}" class="rounded-circle" alt="Profile Image">
                     </li>
                 </ul>
             </div>

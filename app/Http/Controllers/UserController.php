@@ -5,72 +5,59 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(){
-    
+    public function index()
+    {
+
         return view('user.index');
     }
-    
-    public function categories(){
-        $categories = ServiceCategory::select('ServiceCategoryName', 'ImageName')
-            ->distinct()
-            ->orderBy('ServiceCategoryName', 'desc')
-            ->get();
+    public function profile()
+    {
 
-        return view('user.category', compact('categories'));
-    }
-    
-    public function category(Request $request, $category){
-        $salons = Service::join('service_providers', 'services.ServiceProviderID', '=', 'service_providers.id')
-        ->join('service_categories', 'services.ServiceCategoryID', '=', 'service_categories.id')
-        ->leftJoin('service_provider_images', 'service_providers.id', '=', 'service_provider_images.ServiceProviderID')
-        ->where('service_categories.ServiceCategoryName', $category)
-        ->where('service_providers.Status', 'Confirmed')
-        ->orderBy('service_providers.Name', 'DESC')
-        ->select('service_providers.*', 'services.*', 
-        'service_provider_images.ImageName as ImageName') // Select necessary fields
-        ->distinct() // Ensure distinct service providers
-        ->get();
-
-        return view('user.salon-category', compact('salons', 'category'));
-    }
-    public function viewSalon(Request $request, $category){
-        $salons = Service::join('service_providers', 'services.ServiceProviderID', '=', 'service_providers.id')
-        ->join('service_categories', 'services.ServiceCategoryID', '=', 'service_categories.id')
-        ->leftJoin('service_provider_images', 'service_providers.id', '=', 'service_provider_images.ServiceProviderID')
-        ->where('service_categories.ServiceCategoryName', $category)
-        ->where('service_providers.Status', 'Confirmed')
-        ->orderBy('service_providers.Name', 'DESC')
-        ->select('service_providers.*', 'services.*', 
-        'service_provider_images.ImageName as ImageName') // Select necessary fields
-        ->distinct() // Ensure distinct service providers
-        ->get();
-
-        return view('user.salon-category', compact('salons', 'category'));
+        return view('user.profile');
     }
 
-    public function ricercaCategory(Request $request){
-        $html = '';
-        if ($request->has('term')) {
-            $term = '%' .$request->input('term') . '%';
-            $categories = ServiceCategory::where('ServiceCategoryName', 'LIKE', $term)->get();
-            
-            if ($categories->isNotEmpty()) {
-                foreach ($categories as $category) {
-                    $html .= '
-                        <a href="'.route('user.category.salons', ['category' => $category->ServiceCategoryName]).'"         class="list-group-item list-group-item-action Red">'.
-                        $category->ServiceCategoryName.
-                        '</a>';
-                }
-            } else {
-                $html.= '<a class="list-group-item list-group-item-action border-1">
-                            <p>No matches found</p>
-                        </a>';
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'Name'          => 'nullable|string|max:255',
+            'Username'      => 'nullable|string|max:255',
+            'Country'       => 'nullable|string|max:255',
+            'City'          => 'nullable|string|max:255',
+            'Address'       => 'nullable|string|max:255',
+            'PostalCode'    => 'nullable|string|max:255',
+            'Email'         => 'nullable|email|max:255|unique:users,Email,' . $user->id,
+            'PhoneNumber'   => 'nullable|string|max:255',
+            'Password'      => 'nullable|string|min:8|confirmed',
+            'UserImageName' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $input = $request->all();
+
+        if ($request->filled('Password')) {
+            $input['Password'] = Hash::make($request->Password);
+        } else {
+            unset($input['Password']);
+        }
+
+        if ($request->hasFile('UserImageName')) {
+            $imageName = time() . '.' . $request->UserImageName->extension();
+            $request->UserImageName->move('assets/images', $imageName);
+            $input['UserImageName'] = "assets/images/" . $imageName;
+
+            // Delete old profile image if exists
+            if ($user->UserImageName) {
+                unlink($user->UserImageName);
             }
         }
 
-        return $html;
+        $user->update($input);
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }
