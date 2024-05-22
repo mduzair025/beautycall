@@ -50,7 +50,7 @@
                     <img class="card-img-top" src="{{$imageUrl}}" alt="ServiceCategoryImage">
                     <h2 class="card-title">{{ $service->ServiceName }}</h2>
                     <p class="card-text">{{ $service->ShortDescription }}</p>
-                    <a class="btn btn-primary" href="{{route('user.bookings.date-selector')}}/User/DateSelector.php?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
+                    <a class="btn btn-primary" href="{{route('user.bookings.date-selector')}}?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
                 </div>
                 <div class="card-footer text-muted"><br>
                     Time duration: {{ $service->TimeDurationHours }}H:{{ $service->TimeDurationMinutes }}M
