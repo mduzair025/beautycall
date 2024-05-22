@@ -24,11 +24,11 @@
                         <h1 class="dropdownText"> {{$categoryName}}</h1>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @foreach ($categories as $cat) 
-                            <a class="dropdown-item" href="{{ route('user.salon.view', ['salon' => $salon->Name, 'category' => $cat->ServiceCategoryName]) }}">
-                                {{$cat['ServiceCategoryName']}}</a>
+                        @foreach ($categories as $cat)
+                        <a class="dropdown-item" href="{{ route('user.salon.view', ['salon' => $salon->Name, 'category' => $cat->ServiceCategoryName]) }}">
+                            {{$cat['ServiceCategoryName']}}</a>
                         @endforeach
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm"></div>
@@ -37,29 +37,33 @@
             <li class="page-item"></li>
             <li class="page-item disabled"></li>
         </ul>
-    </div>
 
-    <div class="col-md-8">
-        @foreach ($services as $service)
-        <div class="card mb-4">
-            <!-- Your PHP logic for the carousel -->
-            <div class="card-body">
-                <h2 class="card-title">{{ $service->ServiceName }}</h2>
-                <p class="card-text">{{ $service->ShortDescription }}</p>
-                <a class="btn btn-primary" href="{{route('user.bookings.date-selector')}}?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
+        <div class="col-md-8">
+            @foreach ($services as $service)
+            <div class="card mb-4">
+                <!-- Your PHP logic for the carousel -->
+                <div class="card-body">
+                    @php
+                        $image = $service->ImageName ?? '/images/DefaultProfileImage.jpeg';
+                        $imageUrl = (strpos($image, 'https') === 0) ? $image : asset($image);
+                    @endphp
+                    <img class="card-img-top" src="{{$imageUrl}}" alt="ServiceCategoryImage">
+                    <h2 class="card-title">{{ $service->ServiceName }}</h2>
+                    <p class="card-text">{{ $service->ShortDescription }}</p>
+                    <a class="btn btn-primary" href="{{route('user.bookings.date-selector')}}/User/DateSelector.php?ServicePass={{ $service->ServiceName }}&Salonview={{ $salon->Name }}&Categoryview={{ $categoryName }}&Date={{ now() }}">Book→</a>
+                </div>
+                <div class="card-footer text-muted"><br>
+                    Time duration: {{ $service->TimeDurationHours }}H:{{ $service->TimeDurationMinutes }}M
+                    &nbsp &nbsp &nbsp Today: {{ date("l Y.m.d") }}
+                </div>
             </div>
-            <div class="card-footer text-muted"><br>
-                Time duration: {{ $service->TimeDurationHours }}H:{{ $service->TimeDurationMinutes }}M
-                &nbsp &nbsp &nbsp Today: {{ date("l Y.m.d") }}
-            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
     </div>
 </section>
 
 <footer class="py-5 bg-dark">
-    
+
     <p class="m-0 text-center text-white">
         Salon Informations:<br>
         Country: {{ $salon->Country }} <br>
