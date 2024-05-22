@@ -28,8 +28,8 @@ class ServiceProviderFactory extends Factory
             'AverageSalonRating' => $this->faker->numberBetween(1, 5),
             'AdministratorID' => $this->faker->numberBetween(1, 10), // Assuming you have 10 administrators seeded
             'OpeningTimeID' => $this->faker->numberBetween(1, 10), // Assuming you have 10 opening times seeded
-            'Status' => $this->faker->randomElement(['active', 'inactive']),
-            'RatingsNumber' => $this->faker->numberBetween(0, 100),
+            'Status' => $this->faker->randomElement(['Confirmed']),
+            'RatingsNumber' => $this->faker->numberBetween(0, 10),
         ];
     }
 }

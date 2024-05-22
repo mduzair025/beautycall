@@ -18,12 +18,12 @@ class ServiceFactory extends Factory
     {
         return [
             'ServiceName' => $this->faker->sentence,
-            'ServiceCategoryID' => $this->faker->numberBetween(1, 10), // Assuming you have 10 service categories seeded
+            'ServiceCategoryID' => $this->faker->numberBetween(1, 5), // Assuming you have 10 service categories seeded
             'Price' => $this->faker->numberBetween(10, 100),
             'TimeDurationHours' => $this->faker->numberBetween(0, 3),
             'TimeDurationMinutes' => $this->faker->numberBetween(0, 59),
             'ShortDescription' => $this->faker->sentence,
-            'ServiceProviderID' => $this->faker->numberBetween(1, 20), // Assuming you have 20 service providers seeded
+            'ServiceProviderID' => $this->faker->numberBetween(1, 5), // Assuming you have 20 service providers seeded
         ];
     }
 }

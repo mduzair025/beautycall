@@ -20,12 +20,12 @@ class BookingFactory extends Factory
             'BeginTime' => $this->faker->time(),
             'Date' => $this->faker->date(),
         'BookingStatus' => $this->faker->randomElement(['Booked', 'Finished', 'Refused']),
-            'ServiceProviderID' => $this->faker->numberBetween(1, 20), // Assuming you have 20 service providers seeded
-            'ServiceID' => $this->faker->numberBetween(1, 100), // Assuming you have 100 services seeded
-            'BookingRatingID' => $this->faker->numberBetween(1, 50), // Assuming you have 50 booking ratings seeded
-            'UserID' => $this->faker->numberBetween(1, 100), // Assuming you have 100 users seeded
+            'ServiceProviderID' => $this->faker->numberBetween(1, 5), // Assuming you have 20 service providers seeded
+            'ServiceID' => $this->faker->numberBetween(1, 5), // Assuming you have 100 services seeded
+            'BookingRatingID' => $this->faker->numberBetween(1, 5), // Assuming you have 50 booking ratings seeded
+            'UserID' => $this->faker->numberBetween(1, 5), // Assuming you have 100 users seeded
             'FinishTime' => $this->faker->time(),
-            'StaffID' => $this->faker->numberBetween(1, 50), // Assuming you have 50 staff members seeded
+            'StaffID' => $this->faker->numberBetween(1, 5), // Assuming you have 50 staff members seeded
             'Deleted' => null,
         ];
     }

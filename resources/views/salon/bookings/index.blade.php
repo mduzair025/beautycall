@@ -91,11 +91,13 @@
             <div class="col">
                 @if($booking->BookingStatus == 'Booked')
                     <form action="{{route('salon.bookings.manage')}}" method="post" class="d-inline">
+                        @csrf
                         <input type="hidden" name="BookingID" value="{{ $booking->id }}">
                         <input type="hidden" name="Action" value="Finished">
                         <button class="btn btn-primary" name="submit" type="submit">Mark as finished</button>
                     </form>
                     <form action="{{route('salon.bookings.manage')}}" method="post" class="d-inline">
+                        @csrf
                         <input type="hidden" name="BookingID" value="{{ $booking->id }}">
                         <input type="hidden" name="Action" value="Refused">
                         <button class="btn btn-primary" name="submit" type="submit">Refuse</button>

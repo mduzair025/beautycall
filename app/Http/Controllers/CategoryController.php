@@ -23,11 +23,12 @@ class CategoryController extends Controller
         ->leftJoin('service_provider_images', 'service_providers.id', '=', 'service_provider_images.ServiceProviderID')
         ->where('service_categories.ServiceCategoryName', $category)
         ->where('service_providers.Status', 'Confirmed')
-        ->orderBy('service_providers.Name', 'DESC')
+        ->orderBy('service_providers.id', 'DESC')
         ->select('service_providers.*', 'services.*', 
-        'service_provider_images.ImageName as ImageName') // Select necessary fields
+        'service_provider_images.ImageName as ImageName', 'service_providers.Name as SalonName') // Select necessary fields
         ->distinct() // Ensure distinct service providers
         ->get();
+
 
         return view('user.category.view', compact('salons', 'category'));
     }

@@ -18,7 +18,7 @@ class ServiceProviderImageFactory extends Factory
     {
         return [
             'ImageName' => $this->faker->imageUrl(), // Example image URL
-            'ServiceProviderID' => $this->faker->numberBetween(1, 20), // Assuming you have 20 service providers seeded
+            'ServiceProviderID' => $this->faker->numberBetween(1, 10), // Assuming you have 20 service providers seeded
         ];
     }
 }

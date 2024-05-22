@@ -18,7 +18,7 @@ class BookingRatingFactory extends Factory
     {
         return [
             'BookingRatingNumber' => $this->faker->numberBetween(1, 5),
-            'UserID' => $this->faker->numberBetween(1, 100), // Assuming you have 100 users seeded
+            'UserID' => $this->faker->numberBetween(1, 5), // Assuming you have 100 users seeded
         ];
     }
 }

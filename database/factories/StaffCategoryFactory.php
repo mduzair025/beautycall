@@ -17,7 +17,7 @@ class StaffCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'StaffID' => $this->faker->numberBetween(1, 50), // Assuming you have 50 staff members seeded
+            'StaffID' => $this->faker->numberBetween(1, 10), // Assuming you have 50 staff members seeded
             'ServiceCategoryID' => $this->faker->numberBetween(1, 10), // Assuming you have 10 service categories seeded
         ];
     }

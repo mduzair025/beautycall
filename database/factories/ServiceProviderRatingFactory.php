@@ -17,8 +17,8 @@ class ServiceProviderRatingFactory extends Factory
     public function definition(): array
     {
         return [
-            'ServiceProviderID' => $this->faker->numberBetween(1, 20), // Assuming you have 20 service providers seeded
-            'BookingRatingID' => $this->faker->numberBetween(1, 50), // Assuming you have 50 booking ratings seeded
+            'ServiceProviderID' => $this->faker->numberBetween(1, 10), // Assuming you have 20 service providers seeded
+            'BookingRatingID' => $this->faker->numberBetween(1, 10), // Assuming you have 50 booking ratings seeded
         ];
     }
 }

@@ -21,7 +21,7 @@ class StaffFactory extends Factory
             'Surname' => $this->faker->lastName,
             'Email' => $this->faker->unique()->safeEmail,
             'PhoneNumber' => $this->faker->phoneNumber,
-            'ServiceProviderID' => $this->faker->numberBetween(1, 20), // Assuming you have 20 service providers seeded
+            'ServiceProviderID' => $this->faker->numberBetween(1, 10), // Assuming you have 20 service providers seeded
             'ImageName' => $this->faker->imageUrl(), // Example image URL
         ];
     }
